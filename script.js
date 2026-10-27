@@ -3,13 +3,19 @@ const hadanaSlova = [
     "TLUMIC",
     "PREHAZOVACKA",
     "PLAST",
-    "PEDAL"
+    "PEDAL" ,
+    "VIDLICE" ,
+    "RAFEK" ,
+    "RETEZ" ,
+    "KAZETA" ,
+    "SEDLOVKA" ,
+    "RIDITKA"
 ];
 
 let vybraneSlovo = "";
 let uhodnutaPismena = [];
 let pocetChyb = 0;
-const maximalniPocetChyb = 6;
+const maximalniPocetChyb = 7;
 
 function startHry() {
     vybraneSlovo = hadanaSlova[Math.floor(Math.random() * hadanaSlova.length)];
@@ -59,14 +65,21 @@ function hadejPismeno(pismeno) {
         kontrolaKonceHry();
     }
 }
-
+function zamkniKlavesnici() {
+    let tlacitka = document.querySelectorAll("#klavesnice button");
+    for (let btn of tlacitka) {
+        btn.disabled = true;
+    }
+}
 function kontrolaKonceHry() {
     const aktualniStav = document.getElementById("slovo-container").innerText;
 
     if (!aktualniStav.includes("_")) {
+        zamkniKlavesnici();
         setTimeout(() => alert("Dobrá práce, uhodl jsi!"), 100);
     }
     else if (pocetChyb >= maximalniPocetChyb) {
+        zamkniKlavesnici();
         setTimeout(() => alert("Konec hry! Zbyl ti jen rám. Slovo bylo: " + vybraneSlovo), 100);
     }
 }
